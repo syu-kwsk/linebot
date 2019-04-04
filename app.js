@@ -10,9 +10,12 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
   // 1. 固定メッセージを返す
+
+  let ans;
+  ans = '定食ですね？何曜日ですか？';
   return {
     type: "text",
-    text: "入学おめ！"
+    text: ans
   };
 }
 
