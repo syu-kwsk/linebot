@@ -33,6 +33,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   });
   req.on('end', () => {
     console.log(body);
+    res.write(body);
     res.end();
   });
   // for (const event of req.body.events) {
