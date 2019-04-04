@@ -27,12 +27,20 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  for (const event of req.body.events) {
-    if (event.message.type === "text") {
-      const message = createReplyMessage(event.message.text);
-      lineClient.replyMessage(event.replyToken, message);
-    }
-  }
+  let body = '';
+  req.on('data', (chunk) => {
+    body += chunk;
+  });
+  req.on('end', () => {
+    console.log(body);
+    res.end();
+  });
+  // for (const event of req.body.events) {
+  //   if (event.type === "message" && event.message.type === "text") {
+  //     const message = createReplyMessage(event.message.text);
+  //     lineClient.replyMessage(event.replyToken, message);
+  //   }
+  // }
 });
 
 server.listen(process.env.PORT || 8080);
