@@ -10,10 +10,14 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
   // 1. 固定メッセージを返す
-
   let ans;
-  ans = '定食ですね？何曜日ですか？';
-  return {
+  if(event.message.text.indexOf("定食") != -1){
+    ans = '定食ですね？何曜日ですか？';
+  }
+  
+
+  
+   return {
     type: "text",
     text: ans
   };
@@ -36,12 +40,12 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
     res.write(body);
     res.end();
   });
-  // for (const event of req.body.events) {
-  //   if (event.type === "message" && event.message.type === "text") {
-  //     const message = createReplyMessage(event.message.text);
-  //     lineClient.replyMessage(event.replyToken, message);
-  //   }
-  // }
+  for (const event of req.body.events) {
+    if (event.type === "message" && event.message.type === "text") {
+      const message = createReplyMessage(event.message.text);
+      lineClient.replyMessage(event.replyToken, message);
+    }
+  }
 });
 
 server.listen(process.env.PORT || 8080);
