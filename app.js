@@ -11,7 +11,7 @@ const lineClient = new line.Client(lineConfig);
 function createReplyMessage(input) {
   // 1. 固定メッセージを返す
   let ans;
-  if(event.message.text.indexOf("定食") != -1){
+  if(input.indexOf("定食") != -1){
     ans = '定食ですね？何曜日ですか？';
   }
   
