@@ -41,8 +41,10 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   
   for (const event of req.body.events) {
     if (event.type === "message" && event.message.type === "text") {
-      const message = ahi(event.message.text);
-      lineClient.replyMessage(event.replyToken, message);
+      const message1 = ahi(event.message.text);
+      const message2 = createReply(event.message.text);
+      lineClient.replyMessage(event.replyToken, message1);
+      lineClient.replyMessage(event.replyToken, message2);
     }
   }
 });
