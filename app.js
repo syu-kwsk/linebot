@@ -15,7 +15,7 @@ function createReply(input) {
   if(!(input.indexOf("定食") === -1)){
     ans = '定食ですね？何曜日ですか？';
   }
-  else{
+  else if((input.indexOf("定食")　=== -1)){
     ans = 'ahi';
   }
   
