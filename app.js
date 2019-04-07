@@ -22,9 +22,8 @@ function createReply(input) {
 
   
    return {
-    type: "sticker",
-    packageId: input.message.packageId,
-    stickerId: input.message.stickerId 
+    type: "text",
+    text: "ahi"
   };
 }
 
@@ -37,8 +36,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  const message = createReply();
-  lineClient.replyMessage(req.body.events[0].replyToken, message);
+  lineClient.replyMessage(req.body.events[0].replyToken, createReply());
 
   
   // for (const event of req.body.events) {
