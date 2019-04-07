@@ -37,7 +37,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   const message = createReply();
-  lineClient.replyMessage(req.body.events.replyToken, message);
+  lineClient.replyMessage(req.body.events[0].replyToken, message);
 
   
   // for (const event of req.body.events) {
