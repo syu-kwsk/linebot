@@ -8,6 +8,7 @@ const lineConfig = {
 };
 const lineClient = new line.Client(lineConfig);
 
+
 function createReply(input) {
 
   let ans;
@@ -23,36 +24,26 @@ function createReply(input) {
   };
 }
 
-function ahi(input){
-  return{
-    type: "text",
-    text: "ahi"
-  };
-}
 
 const server = express();
 
 server.use("/images", express.static(path.join(__dirname, "images")));
 
-server.post("/", line.middleware(lineConfig), (req, res) => {
+server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  
-  for (const event1 of req.body.events) {
-    if (event1.type === "message" && event1.message.type === "text") {
-      const message1 = createReply(event1.message.text);
-      lineClient.replyMessage(event1.replyToken, message1);
-    }
-  }
+  const message = createReply(req.body.events.message.text);
+  lineClient.replyMessage(req.body.events.replyToken, message);
 
-  for (const event2 of req.body.events) {
-    if (event2.type === "message" && event2.message.type === "text") {
-      const message2 = ahi(event2.message.text);
-      lineClient.replyMessage(event2.replyToken, message2);
-    }
-  }
   
+  // for (const event of req.body.events) {
+  //   if (event.type === "message" && event.message.type === "text") {
+  //     const message = createReply(event.message.text);
+  //     lineClient.replyMessage(event.replyToken, message);
+  //   }
+  // }
+
       
 });
 
