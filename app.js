@@ -23,7 +23,7 @@ function createReply(input) {
   
    return {
     type: "text",
-    text: ans
+    text: "ahi"
   };
 }
 
