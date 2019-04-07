@@ -8,10 +8,10 @@ const lineConfig = {
 };
 const lineClient = new line.Client(lineConfig);
 
-function createReplyMessage(input) {
-  // 1. 固定メッセージを返す
+function createReply(input) {
+
   let ans;
-  if(input.indexOf("定食") != -1){
+  if(!(input.indexOf("定食") === -1)){
     ans = '定食ですね？何曜日ですか？';
   }
   
@@ -19,7 +19,14 @@ function createReplyMessage(input) {
   
    return {
     type: "text",
-    text: ans
+    text: events.user
+  };
+}
+
+function ahi(input){
+  return{
+    type: "text",
+    text: "ahi"
   };
 }
 
@@ -31,18 +38,10 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  let body = '';
-  req.on('data', (chunk) => {
-    body += chunk;
-  });
-  req.on('end', () => {
-    console.log(body);
-    res.write(body);
-    res.end();
-  });
+  
   for (const event of req.body.events) {
     if (event.type === "message" && event.message.type === "text") {
-      const message = createReplyMessage(event.message.text);
+      const message = ahi(event.message.text);
       lineClient.replyMessage(event.replyToken, message);
     }
   }
