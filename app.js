@@ -23,8 +23,8 @@ function createReply(input) {
   
    return {
     type: "sticker",
-    packageId: input.events.messag.packageId,
-    stickerId: input.events.messag.stickerId 
+    packageId: input.message.packageId,
+    stickerId: input.message.stickerId 
   };
 }
 
