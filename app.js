@@ -22,8 +22,8 @@ function createReply(input) {
 
   
    return {
-    type: "text",
-    text: "ahi"
+    type: "file",
+    text: 'ファイルサイズ："failsize"'
   };
 }
 
