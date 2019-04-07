@@ -15,6 +15,9 @@ function createReply(input) {
   if(!(input.indexOf("定食") === -1)){
     ans = '定食ですね？何曜日ですか？';
   }
+  else{
+    ans = 'ahi';
+  }
   
 
   
@@ -33,7 +36,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  const message = createReply(req.body.events.message.text);
+  const message = createReply(req.body.events.message);
   lineClient.replyMessage(req.body.events.replyToken, message);
 
   
