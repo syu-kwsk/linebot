@@ -39,14 +39,21 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   
-  for (const event of req.body.events) {
-    if (event.type === "message" && event.message.type === "text") {
-      const message1 = ahi(event.message.text);
-      const message2 = createReply(event.message.text);
-      lineClient.replyMessage(event.replyToken, message1);
-      lineClient.replyMessage(event.replyToken, message2);
+  for (const event1 of req.body.events) {
+    if (event1.type === "message" && event1.message.type === "text") {
+      const message1 = createReply(event1.message.text);
+      lineClient.replyMessage(event1.replyToken, message1);
     }
   }
+
+  for (const event2 of req.body.events) {
+    if (event2.type === "message" && event2.message.type === "text") {
+      const message2 = ahi(event2.message.text);
+      lineClient.replyMessage(event2.replyToken, message2);
+    }
+  }
+  
+      
 });
 
 server.listen(process.env.PORT || 8080);
