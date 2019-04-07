@@ -19,7 +19,7 @@ function createReply(input) {
   
    return {
     type: "text",
-    text: events.user
+    text: ans
   };
 }
 
