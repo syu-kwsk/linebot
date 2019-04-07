@@ -22,8 +22,9 @@ function createReply(input) {
 
   
    return {
-    type: "file",
-    text: 'ファイルサイズ："failsize"'
+    type: "sticker",
+    packageId: input.events.messag.packageId,
+    stickerId: input.events.messag.stickerId 
   };
 }
 
