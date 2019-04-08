@@ -11,7 +11,7 @@ const lineClient = new line.Client(lineConfig);
 function createReplyMessage(input) {
 
   let text = "";
-  let messages = [];
+  const messages = [];
 
   function message(str) {
     return {
