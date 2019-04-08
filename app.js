@@ -18,9 +18,7 @@ function createReply(input) {
   // else if((input.indexOf("定食")　=== -1)){
   //   ans = 'ahi';
   // }
-  
-
-  
+    
    return {
     type: "sticker",
     packageid: input.message.packageId,
