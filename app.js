@@ -22,8 +22,9 @@ function createReply(input) {
 
   
    return {
-    type: "text",
-    text: "ahi"
+    type: "sticker",
+    packageid: input.message.packageId,
+    stickerid: input.message.stickerId
   };
 }
 
@@ -36,9 +37,8 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  lineClient.replyMessage(req.body.events[0].replyToken, createReply());
+  lineClient.replyMessage(req.body.events[0].replyToken, createReply(req.body.events[0]));
 
-  
   // for (const event of req.body.events) {
   //   if (event.type === "message" && event.message.type === "text") {
   //     const message = createReply(event.message.text);
