@@ -9,7 +9,7 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 
-function createReply(input) {
+function createReply() {
 
   
    return {
@@ -28,7 +28,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  lineClient.replyMessage(req.body.events[0].replyToken, createReply(req.body.events[0]));
+  lineClient.replyMessage(req.body.events[0].replyToken, createReply());
 
   // for (const event of req.body.events) {
   //   if (event.type === "message" && event.message.type === "text") {
