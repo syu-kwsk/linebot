@@ -44,9 +44,9 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   for (const event of req.body.events) {
-    if (event.type === "source") {
+    if (event.type === "message") {
      // const message = createReplyMessage(event.source);
-      lineClient.replyMessage(event.source.replyToken, "ブロックしてくださいｗ");
+      lineClient.replyMessage(event.replyToken, "ブロックしてくださいｗ");
     }
   }
 });
