@@ -39,8 +39,8 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  const message = createReplyMessage(req.body.events[0].source);
-  lineClient.replyMessage(req.body.events[0].replyToken, message);
+  const ahi = createReplyMessage(req.body.events[0].source);
+  lineClient.replyMessage(req.body.events[0].replyToken, ahi);
   
 });
 
