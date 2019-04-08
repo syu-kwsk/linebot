@@ -25,11 +25,8 @@ function createReplyMessage(input) {
   }
   else if(input.type === "unfollow"){
     message("誰かにブロックされました");
+    messages.push(message(text));
   }
- 
-  
-
-  messages.push(message(text));
   
   return messages;
 }
