@@ -24,7 +24,11 @@ function createReplyMessage(input) {
     messages.push(message(text));
   }
   else if(input.type === "unfollow"){
-    message("誰かにブロックされました");
+    text = "誰かにブロックされました。";
+    messages.push(message(text));
+  }
+  else{
+    text = "ブロックしてくださいｗ";
     messages.push(message(text));
   }
   
