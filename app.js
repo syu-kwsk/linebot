@@ -14,8 +14,8 @@ function createReply() {
   
    return {
     type: "sticker",
-    packageid: '1',
-    stickerid: '1'
+    packageId: '1',
+    stickerId: '1'
   };
 }
 
