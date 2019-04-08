@@ -11,13 +11,20 @@ const lineClient = new line.Client(lineConfig);
 
 function createReply(input) {
 
-  
-   return {
+   return [ 
+   {
     type: "sticker",
     packageId: input.message.packageId,
     stickerId: input.message.stickerId
-  };
-}
+   },
+  {
+
+    type: "sticker",
+    packageId: input.message.packageId,
+    stickerId: input.message.stickerId + 1
+  }
+];
+
 
 
 const server = express();
