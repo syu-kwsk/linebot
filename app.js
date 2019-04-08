@@ -20,14 +20,14 @@ function createReplyMessage(input) {
     }
   }
   if(input.type === "follow"){
-　  text = "誰かに追加されました。";
+　  text = "誰かにフォローされました。";
     messages.push(message(text));
   }
   else if(input.type === "unfollow"){
   　text = "誰かにブロックされました。";
   　messages.push(message(text));
   }
-    
+
   return messages;
 }
 
@@ -38,13 +38,9 @@ server.use("/images", express.static(path.join(__dirname, "images")));
 server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
-
-  for (const event of req.body.events) {
-    if (event.type === "message" && event.message.type === "text") {
-      const message = createReplyMessage(event.message);
-      lineClient.replyMessage(event.replyToken, message);
-    }
-  }
+  const message = createReplyMessage(req.body.events.message);
+  lineClient.replyMessage(req.body.events.replyToken, message);
+  
 });
 
 server.listen(process.env.PORT || 8080);
