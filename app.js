@@ -18,20 +18,10 @@ function createReplyMessage(input) {
       type: "text",
       text: str
     }
-  }
-  if(input.type === "follow"){
-　　text = "誰かに追加されました。";
-    messages.push(message(text));
-  }
-  else if(input.type === "unfollow"){
-    text = "誰かにブロックされました。";
-    messages.push(message(text));
-  }
-  else{
-    text = "ブロックしてくださいｗ";
-    messages.push(message(text));
-  }
-  
+  } 
+  text = "ブロックしてください";
+  messages.push(message(text));
+
   return messages;
 }
 
@@ -45,8 +35,8 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
 
   for (const event of req.body.events) {
     if (event.type === "message") {
-     // const message = createReplyMessage(event.source);
-      lineClient.replyMessage(event.replyToken, "ブロックしてくださいｗ");
+     const message = createReplyMessage(event.message.text);
+      lineClient.replyMessage(event.replyToken, message);
     }
   }
 });
