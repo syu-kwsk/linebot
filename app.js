@@ -11,18 +11,11 @@ const lineClient = new line.Client(lineConfig);
 
 function createReply(input) {
 
-  // let ans;
-  // if(!(input.indexOf("定食") === -1)){
-  //   ans = '定食ですね？何曜日ですか？';
-  // }
-  // else if((input.indexOf("定食")　=== -1)){
-  //   ans = 'ahi';
-  // }
-    
+  
    return {
     type: "sticker",
-    packageid: input.message.packageId,
-    stickerid: input.message.stickerId
+    packageid: 1,
+    stickerid: 1
   };
 }
 
