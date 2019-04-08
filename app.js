@@ -38,8 +38,8 @@ server.use("/images", express.static(path.join(__dirname, "images")));
 server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
-  const message = createReplyMessage(req.body.events.message);
-  lineClient.replyMessage(req.body.events.replyToken, message);
+  const message = createReplyMessage(req.body.events[0].message);
+  lineClient.replyMessage(req.body.events[0].replyToken, message);
   
 });
 
