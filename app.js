@@ -40,7 +40,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   const message = createReplyMessage(req.body.events[0].source);
-  lineClient.replyMessage(req.body.events[0].replyToken, source);
+  lineClient.replyMessage(req.body.events[0].replyToken, message);
   
 });
 
