@@ -9,28 +9,30 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-return  "ahi";
+
+  let text = "";
+  let messages = [];
+
+  function message(str) {
+    return {
+      type: "text",
+      text: str
+    }
+  }
+  if(input.type === "follow"){
+　　text = "誰かに追加されました。";
+    messages.push(message(text));
+  }
+  else if(input.type === "unfollow"){
+    message("誰かにブロックされました");
+  }
+ 
+  
+
+  messages.push(message(text));
+  
+  return messages;
 }
-//   let text = "";
-//   let messages = [];
-
-//   function message(str) {
-//     return {
-//       type: "text",
-//       text: str
-//     }
-//   }
-//   if(input.type === "follow"){
-// 　  text = "誰かにフォローされました。";
-//     messages.push(message(text));
-//   }
-//   else if(input.type === "unfollow"){
-//   　text = "誰かにブロックされました。";
-//   　messages.push(message(text));
-//   }
-
-//   return messages;
-// }
 
 const server = express();
 
@@ -40,9 +42,12 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
-  const ahi = createReplyMessage();
-  lineClient.replyMessage(req.body.events[0].replyToken, ahi);
-  
+  for (const event of req.body.events) {
+    if (event.type === "source") {
+      const message = createReplyMessage(event.source);
+      lineClient.replyMessage(event.replyToken, message);
+    }
+  }
 });
 
 server.listen(process.env.PORT || 8080);
