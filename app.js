@@ -44,6 +44,10 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
       const event_message = createReplyMessage(event);
       lineClient.pushMessage(event.source.groupId, event_message);
     }
+    else{
+      const event_message = createReplyMessage(event);
+      lineClient.pushMessage((event.source.groupId | event.source.userId), event_message);
+    }
    
   }
 });
