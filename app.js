@@ -37,12 +37,12 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
 
   for (const event of req.body.events) {
     if (event.source.type === "userId") {
-      const message = createReplyMessage(event);
-      lineClient.pushMessage(event.source.userId, message);
+      const event_message = createReplyMessage(event);
+      lineClient.pushMessage(event.source.userId, event_message);
     }
     else if(event.source.type == "groupId"){
-      const message = createReplyMessage(event);
-      lineClient.pushMessage(event.source.groupId, message);
+      const event_message = createReplyMessage(event);
+      lineClient.pushMessage(event.source.groupId, event_message);
     }
    
   }
