@@ -38,7 +38,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   for (const event of req.body.events) {
     if (event.type === "source") {
      const message = createReplyMessage(event);
-      lineClient.replyMessage(event.replyToken, message);
+      lineClient.pushMessage(event.source.userId | event.source.groupId, message);
     }
   }
 });
