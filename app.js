@@ -10,21 +10,21 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
 
-  input.type.type = "text";
+  let message = "";
 
   if(input.type === "follow"){
-   input.type.text = "誰かにフォローされました";
+   message = "誰かにフォローされました";
   }
   else if(input.type === "unfollow"){
-    input.type.text = "誰かにブロックされました";
+    message = "誰かにブロックされました";
   }
   else{
-    input.type.text = "ブロックしてください";
+    message = "ブロックしてください";
   }
 
   return{
-  type: input.type.type,
-  text: input.type.text
+  type: "text",
+  text: message
   };
 }
 const server = express();
