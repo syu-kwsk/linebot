@@ -42,7 +42,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
     }
     else if(event.source.type == "groupId"){
       const message = createReplyMessage(event);
-      lineClient.pushMessage(events.source.groupId, message);
+      lineClient.pushMessage(event.source.groupId, message);
     }
    
   }
