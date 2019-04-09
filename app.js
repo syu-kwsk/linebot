@@ -10,21 +10,21 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
 
-  input.source.type.type = "text";
+  input.type.type = "text";
 
-  if(input.source.type === "follow"){
-   input.source.type.text = "誰かにフォローされました";
+  if(input.type === "follow"){
+   input.type.text = "誰かにフォローされました";
   }
-  else if(input.source.type === "unfollow"){
-    input.source.type.text = "誰かにブロックされました";
+  else if(input.type === "unfollow"){
+    input.type.text = "誰かにブロックされました";
   }
   else{
-    input.source.type.text = "ブロックしてください";
+    input.type.text = "ブロックしてください";
   }
 
   return{
-  type: input.source.type.type,
-  text: input.source.type.text
+  type: input.type.type,
+  text: input.type.text
   };
 }
 const server = express();
@@ -38,7 +38,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   for (const event of req.body.events) {
     if (event.type === "source") {
      const message = createReplyMessage(event);
-      lineClient.pushMessage(event.source.userId | event.source.groupId, message);
+      lineClient.pushMessage(event.source.userId, message);
     }
   }
 });
