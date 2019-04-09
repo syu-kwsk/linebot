@@ -10,7 +10,7 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
 
-  input.source.type = "text";
+  input.source.type.type = "text";
 
   if(input.source.type === "follow"){
    input.source.type.text = "誰かにフォローされました";
@@ -23,7 +23,7 @@ function createReplyMessage(input) {
   }
 
   return{
-  type: input.source.type,
+  type: input.source.type.type,
   text: input.source.type.text
   };
 }
