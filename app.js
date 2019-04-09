@@ -36,7 +36,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   for (const event of req.body.events) {
-    if (event.type === "source") {
+    if (event.type === "follow" || event.type === "unfollow" || event.type === "message") {
      const message = createReplyMessage(event);
       lineClient.pushMessage(event.source.userId, message);
     }
