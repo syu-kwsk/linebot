@@ -9,6 +9,9 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
+
+  input.source.type = "text";
+
   if(input.source.type === "follow"){
    input.source.type.text = "誰かにフォローされました";
   }
@@ -19,13 +22,11 @@ function createReplyMessage(input) {
     input.source.type.text = "ブロックしてください";
   }
 
-
   return{
-  type: text,
+  type: input.source.type,
   text: input.source.type.text
   };
 }
-
 const server = express();
 
 server.use("/images", express.static(path.join(__dirname, "images")));
@@ -35,7 +36,7 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   for (const event of req.body.events) {
-    if (event.type === "source" ) {
+    if (event.type === "source") {
      const message = createReplyMessage(event);
       lineClient.replyMessage(event.replyToken, message);
     }
