@@ -36,10 +36,15 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   for (const event of req.body.events) {
-    if (event.type === "follow" || event.type === "unfollow" || event.type === "message") {
+    if (event.source.type === "userId") {
      const message = createReplyMessage(event);
       lineClient.pushMessage(event.source.userId, message);
     }
+    else if(event.source.type == "groupId"){
+      const message = createReplyMessage(event);
+      lineClient.pushMessage(events.source.groupId, message);
+    }
+   
   }
 });
 
