@@ -13,7 +13,6 @@ function createReplyMessage(input) {
    input.message.text = "誰かにフォローされました";
   }
   else if(input.source.type === "unfollow"){
-
     input.message.text = "誰かにブロックされました";
   }
   else{
@@ -21,7 +20,10 @@ function createReplyMessage(input) {
   }
 
 
-  return input.message.text;
+  return{
+  type: text,
+  text: input.message.text
+  };
 }
 
 const server = express();
