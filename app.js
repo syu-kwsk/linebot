@@ -31,13 +31,13 @@ const server = express();
 
 server.use("/images", express.static(path.join(__dirname, "images")));
 
-server.post("/", line.middleware(lineConfig), (req, res) => {
+server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
 
   for (const event of req.body.events) {
     if (event.source.type === "userId") {
-     const message = createReplyMessage(event);
+      const message = createReplyMessage(event);
       lineClient.pushMessage(event.source.userId, message);
     }
     else if(event.source.type == "groupId"){
