@@ -22,7 +22,7 @@ function createReplyMessage(input) {
 
   return{
   type: text,
-  text: input.message.text
+  text: input.source.type.text
   };
 }
 
