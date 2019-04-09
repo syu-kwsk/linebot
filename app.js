@@ -9,20 +9,19 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
+  if(input.source.type === "follow"){
+   input.message.text = "誰かにフォローされました";
+  }
+  else if(input.source.type === "unfollow"){
 
-  let text = "";
-  const messages = [];
+    input.message.text = "誰かにブロックされました";
+  }
+  else{
+    input.message.text = "ブロックしてください";
+  }
 
-  function message(str) {
-    return {
-      type: "text",
-      text: str
-    }
-  } 
-  text = "ブロックしてください";
-  messages.push(message(text));
 
-  return messages;
+  return input.message.text;
 }
 
 const server = express();
@@ -34,8 +33,8 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   for (const event of req.body.events) {
-    if (event.type === "message") {
-     const message = createReplyMessage(event.message.text);
+    if (event.type === "message" && event.message.type === "text") {
+     const message = createReplyMessage(event);
       lineClient.replyMessage(event.replyToken, message);
     }
   }
