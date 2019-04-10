@@ -25,9 +25,27 @@ function createReplyMessage(input) {
   if(input.indexOf("健康") === -1){
     text = "健康に興味ありませんか？BMIを測ります。";
     messages.push(make_message(text));
-    text = "「身長」mと「体重」kgを入力してください。単位を半角英数字で忘れないようにしてください！";
+    text = "「身長」mと「体重」kgをこの順で入力してください。単位を半角英数字で忘れないようにしてください！";
     messages.push(make_message(text));
   }
+  else{
+    if(input.indexOf("m") < input.indexOf("kg")){
+      text = "!!warning!!\n順番が逆です";
+      messages.push(make_message(text));
+    }
+    else{
+      const m_pos = input.indexOf("m") - 1;
+      let kg_pos = input.indexOf("kg") - 1;
+
+      text = `m_posは${m_pos},kg_posは${kg_pos}`;
+      messages.push(make_message(text));
+    }
+
+  }
+
+  
+
+
 
   return messages;
 }
