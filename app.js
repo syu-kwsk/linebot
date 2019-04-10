@@ -32,7 +32,7 @@ if(input.indexOf("健康") === -1){
 
   return{
   type: "text",
-  text: message
+  text: messages
   };
 }
 const server = express();
