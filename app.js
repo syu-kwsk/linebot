@@ -26,27 +26,27 @@ function createReplyMessage(input) {
   if(input.indexOf("健康") === -1 && input.indexOf("m") === -1 && input.indexOf("kg") === -1){
     text = "健康に興味ありませんか？BMIを測ります。";
     messages.push(make_message(text));
-    text = "「身長」mと「体重」kgをこの順で入力してください。単位を半角英数字で忘れないようにしてください！";
+    text = "「身長」cmと「体重」kgをこの順で入力してください。単位を半角英数字で忘れないようにしてください！";
     messages.push(make_message(text));
   }
   else{
-    if(input.indexOf("m") > input.indexOf("kg")){
+    if(input.indexOf("cm") > input.indexOf("kg")){
       text = "!!warning!!\n順番が逆です";
       messages.push(make_message(text));
       status = "warning"
     }
-    if(input.indexOf("m") === -1 || input.indexOf("kg") === -1){
+    if(input.indexOf("cm") === -1 || input.indexOf("kg") === -1){
       text = "!!warning!!\n要素が抜けています。やり直し！";
       messages.push(make_message(text));
       status = "warning"
     }
 
     else if(status != "warning"){
-      const m_pos = input.indexOf("m");
-      const kg_pos = input.indexOf("kg") + 1;
+      const m_pos = input.indexOf("cm");
+      const kg_pos = input.indexOf("kg");
 
       let length_data = input.slice(0, m_pos);
-      let weigth_data = input.slice();
+      let weigth_data = input.slice(m_pos);
 
     
       
@@ -55,7 +55,7 @@ function createReplyMessage(input) {
   
 
 
-      text = `身長は${length},体重は${weight}`;
+      text = `身長は${length},体重は${weight}` + weigth_data;
       messages.push(make_message(text));
     }
 
