@@ -12,6 +12,7 @@ function createReplyMessage(input) {
 
   
   let text;
+  let status;
   const messages = [];
 
 
