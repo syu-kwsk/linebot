@@ -10,6 +10,7 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
 
+  
   let text;
   const messages = [];
 
@@ -27,9 +28,6 @@ function createReplyMessage(input) {
     text = "「身長」mと「体重」kgを入力してください。単位を半角英数字で忘れないようにしてください！";
     messages.push(make_message(text));
   }
-
-
-
 
   return messages;
 }
