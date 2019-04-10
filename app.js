@@ -10,17 +10,25 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
 
-  let message = "";
+  let text;
+  const messages = [];
 
-  if(input.type === "follow"){
-   message = "誰かにフォローされました";
+
+  function make_message(str){
+    return{
+      type: text,
+      text: str
+    };
   }
-  else if(input.type === "unfollow"){
-    message = "誰かにブロックされました";
-  }
-  else{
-    message = "ブロックしてください";
-  }
+   
+if(input.indexOf("健康") === -1){
+  text = "健康に興味ありませんか？\nBMIを測ります。";
+  messages.push(make_message(text));
+  text = " 「身長」mと「体重」kgを入力してください。\n単位を半角英数字で忘れないようにしてください！";
+}
+
+
+
 
   return{
   type: "text",
@@ -36,18 +44,11 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   for (const event of req.body.events) {
-    if (event.source.type === "user") {
-      const event_message = createReplyMessage(event);
+    if (event.type === "message" && event.message.type === "text") {
+    　const event_message = createReplyMessage(event);
       lineClient.pushMessage(event.source.userId, event_message);
     }
-    else if(event.source.type == "group"){
-      const event_message = createReplyMessage(event);
-      lineClient.pushMessage(event.source.groupId, event_message);
-    }
-    // else{
-    //   const event_message = createReplyMessage(event);
-    //   lineClient.pushMessage(event.source.userId, event_message);
-    // }
+    
    
   }
 });
