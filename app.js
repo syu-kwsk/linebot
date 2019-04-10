@@ -31,9 +31,7 @@ function createReplyMessage(input) {
 
 
 
-  return{
-  messages
-  };
+  return messages;
 }
 const server = express();
 
