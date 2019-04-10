@@ -53,7 +53,7 @@ function createReplyMessage(input) {
       let weight = parseInt(weigth_data);
 
 
-      BMI = Math.floor( weight*10000 / (length*length));
+      BMI = Math.fround( weight*10000 / (length*length));
 
 
       text = `あなたのBMIは${BMI}です。`;
