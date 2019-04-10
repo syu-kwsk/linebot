@@ -13,6 +13,7 @@ function createReplyMessage(input) {
   
   let text;
   let status;
+  let BMI;
   const messages = [];
 
 
@@ -48,14 +49,21 @@ function createReplyMessage(input) {
       let length_data = input.slice(m_pos - 3, m_pos);
       let weigth_data = input.slice(kg_pos - 2, kg_pos);
 
-    
-      
       let length = parseInt(length_data);
       let weight = parseInt(weigth_data);
+
+      if(length == NaN || weight == NaN){
+        text = "あなたは身長が三桁にいかないか体重が二桁にいかないため測定出来ません。\nさようなら。";
+        status = "cannot check"
+      }
+      
+      else if(status != "cannot check"){
+        BMI = weight*10000 / (length*length);
+      }
   
 
 
-      text = `身長は${length},体重は${weight}` + weigth_data;
+      text = `あなたのBMIは${BMI}です。`;
       messages.push(make_message(text));
     }
 
