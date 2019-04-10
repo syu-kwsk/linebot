@@ -53,8 +53,9 @@ function createReplyMessage(input) {
       let weight = parseInt(weigth_data);
 
         if(isNaN(length) || isNaN(weight)){
-          text = "身長は三桁、体重は二桁以内でお願いします。\n"
-                "というのも適正体重が三桁以上というのは身長が２ｍを超える方だからです。";
+          text = "身長は三桁、体重は二桁以内でお願いします。";
+          messages.push(make_message(text));
+          text = "というのも適正体重が三桁以上というのは身長が２ｍを超える方だからです。";
           messages.push(make_message(text));
           status = "not_check";
         }
