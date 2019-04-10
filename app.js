@@ -29,7 +29,7 @@ function createReplyMessage(input) {
     messages.push(make_message(text));
   }
   else{
-    if(input.indexOf("m") < input.indexOf("kg")){
+    if(input.indexOf("m") > input.indexOf("kg")){
       text = "!!warning!!\n順番が逆です";
       messages.push(make_message(text));
     }
@@ -39,10 +39,24 @@ function createReplyMessage(input) {
     }
 
     else{
-      const m_pos = input.indexOf("m") - 1;
-      let kg_pos = input.indexOf("kg") - 1;
+      const m_pos = input.indexOf("m") + 1;
+      const kg_pos = input.indexOf("kg") + 1;
 
-      text = `m_posは${m_pos},kg_posは${kg_pos}`;
+      let length = [];
+      let weight = [];
+
+      for(let i = m_pos - 3; i < m_pos; i++){
+        length.push(input[i]);
+      }
+      for(let i = kg_pos - 2; i < kg_pos; i++){
+        weight.push(input[i]);
+      }
+
+
+
+
+
+      text = `lengthは${length},weightは${weight}`;
       messages.push(make_message(text));
     }
 
