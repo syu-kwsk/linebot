@@ -53,9 +53,9 @@ function createReplyMessage(input) {
       let weight = parseInt(weigth_data);
 
         if(isNaN(length) || isNaN(weight)){
-          text = "身長は三桁、体重は二桁以内でお願いします。";
+          text = "身長は三桁、体重は二桁以上でお願いします。";
           messages.push(make_message(text));
-          text = "というのも適正体重が三桁以上というのは身長が２ｍを超える方だからです。";
+          text = "その範囲にいない方は測定できません";
           messages.push(make_message(text));
           status = "not_check";
         }
@@ -71,17 +71,22 @@ function createReplyMessage(input) {
             text = `あなたのBMIは${BMI}です。`;
           messages.push(make_message(text));
 
-          if(BMI < 18.5){
+          if(BMI < 18.5 && BMI > 10){
             text = "痩せています。\nたくさん食べましょう。";
             messages.push(make_message(text));
           }
-          else if(BMI < 22.5){
+          else if(BMI < 22.5 && BMI > 18.5){
             text = "適正範囲です。\n保ちましょう。";
             messages.push(make_message(text));
           }
-          else {
+          else if(BMI < 40 && BMI > 22.5){
             text = "太りすぎです。\nさようなら。";
             messages.push(make_message(text));
+          }
+          else{
+            text = "まじか\nそんなこともあるんですね。";
+            messages.push(make_message(text));
+
           }
 
         }        
