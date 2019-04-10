@@ -33,6 +33,11 @@ function createReplyMessage(input) {
       text = "!!warning!!\n順番が逆です";
       messages.push(make_message(text));
     }
+    if(input.indexOf("m") === -1 || input.indexOf("kg") === -1){
+      text = "!!warning!!\n要素が抜けています。やり直し！";
+      messages.push(make_message(text));
+    }
+
     else{
       const m_pos = input.indexOf("m") - 1;
       let kg_pos = input.indexOf("kg") - 1;
