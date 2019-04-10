@@ -52,7 +52,7 @@ function createReplyMessage(input) {
       let length = parseInt(length_data);
       let weight = parseInt(weigth_data);
 
-        if(length === NaN || weight === NaN){
+        if(isNaN(length) || isNaN(weight)){
           text = "身長は三桁、体重は二桁以内でお願いします。\n"
                 "というのも適正体重が三桁以上というのは身長が２ｍを超える方だからです。";
           messages.push(make_message(text));
@@ -61,7 +61,7 @@ function createReplyMessage(input) {
         else if(status == "true"){
           BMI = Math.fround( weight*10000 / (length*length));
 
-          if(BMI === NaN){
+          if(isNaN(BMI)){
             text = "エラー発生。\nそれは人ですか？"
             messages.push(make_message(text));
             status = "error"
