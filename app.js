@@ -32,31 +32,26 @@ function createReplyMessage(input) {
     if(input.indexOf("m") > input.indexOf("kg")){
       text = "!!warning!!\n順番が逆です";
       messages.push(make_message(text));
+      status = "warning"
     }
     if(input.indexOf("m") === -1 || input.indexOf("kg") === -1){
       text = "!!warning!!\n要素が抜けています。やり直し！";
       messages.push(make_message(text));
+      status = "warning"
     }
 
-    else{
+    else if(status != "warning"){
       const m_pos = input.indexOf("m") + 1;
       const kg_pos = input.indexOf("kg") + 1;
 
-      let length = [];
-      let weight = [];
-
-      for(let i = m_pos - 3; i < m_pos; i++){
-        length.push(input[i]);
-      }
-      for(let i = kg_pos - 2; i < kg_pos; i++){
-        weight.push(input[i]);
-      }
+      let data = input.split("m", 2);
+      
+      let length = parseInt(data[0]);
+      let weight = parseInt(data[1]);
+  
 
 
-
-
-
-      text = `lengthは${length},weightは${weight}`;
+      text = `身長は${length},体重は${weight}`;
       messages.push(make_message(text));
     }
 
