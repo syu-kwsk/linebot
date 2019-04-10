@@ -16,17 +16,17 @@ function createReplyMessage(input) {
 
   function make_message(str){
     return{
-      type: text,
+      type: "text",
       text: str
     };
   }
    
-if(input.indexOf("健康") === -1){
-  text = "健康に興味ありませんか？BMIを測ります。";
-  messages.push(make_message(text));
-  text = "「身長」mと「体重」kgを入力してください。単位を半角英数字で忘れないようにしてください！";
-  messages.push(make_message(text));
-}
+  if(input.indexOf("健康") === -1){
+    text = "健康に興味ありませんか？BMIを測ります。";
+    messages.push(make_message(text));
+    text = "「身長」mと「体重」kgを入力してください。単位を半角英数字で忘れないようにしてください！";
+    messages.push(make_message(text));
+  }
 
 
 
