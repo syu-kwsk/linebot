@@ -41,9 +41,7 @@ function createReplyMessage(input) {
     }
 
     else if(status != "warning"){
-      const m_pos = input.indexOf("m") + 1;
-      const kg_pos = input.indexOf("kg") + 1;
-
+      
       let data = input.split("m", 2);
       
       let length = parseInt(data[0]);
