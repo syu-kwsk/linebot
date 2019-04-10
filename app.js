@@ -25,14 +25,14 @@ if(input.indexOf("健康") === -1){
   text = "健康に興味ありませんか？\nBMIを測ります。";
   messages.push(make_message(text));
   text = " 「身長」mと「体重」kgを入力してください。\n単位を半角英数字で忘れないようにしてください！";
+  messages.push(make_message(text));
 }
 
 
 
 
   return{
-  type: "text",
-  text: messages
+  messages
   };
 }
 const server = express();
@@ -47,9 +47,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
     if (event.type === "message" && event.message.type === "text") {
     　const event_message = createReplyMessage(event.message.text);
       lineClient.replyMessage(event.replyToken, event_message);
-    }
-    
-   
+    }   
   }
 });
 
