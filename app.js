@@ -44,10 +44,10 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   for (const event of req.body.events) {
-    if (event.message.type === "text") {
-    　const event_message = createReplyMessage(event.message.text);
-      lineClient.replyMessage(event.replyToken, event_message);
-    }   
+    if (event.type === "message" && event.message.type === "text") {
+      const message = createReplyMessage(event.message.text);
+      lineClient.replyMessage(event.replyToken, message);
+    }
   }
 });
 
