@@ -22,9 +22,9 @@ function createReplyMessage(input) {
   }
    
 if(input.indexOf("健康") === -1){
-  text = "健康に興味ありませんか？\nBMIを測ります。";
+  text = "健康に興味ありませんか？BMIを測ります。";
   messages.push(make_message(text));
-  text = " 「身長」mと「体重」kgを入力してください。\n単位を半角英数字で忘れないようにしてください！";
+  text = "「身長」mと「体重」kgを入力してください。単位を半角英数字で忘れないようにしてください！";
   messages.push(make_message(text));
 }
 
