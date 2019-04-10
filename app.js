@@ -46,7 +46,7 @@ function createReplyMessage(input) {
       const kg_pos = input.indexOf("kg");
 
       let length_data = input.slice(0, m_pos);
-      let weigth_data = input.slice(m_pos-2);
+      let weigth_data = input.slice(m_pos+2);
 
     
       
