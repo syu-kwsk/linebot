@@ -9,93 +9,17 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-
-  
-  let text;
-  let status = "true";
-  let BMI;
-  const messages = [];
-
-
-  function make_message(str){
-    return{
-      type: "text",
-      text: str
-    };
-  }
-   
-  if(input.indexOf("健康") === -1 && input.indexOf("m") === -1 && input.indexOf("kg") === -1){
-    text = "健康に興味ありませんか？BMIを測ります。";
-    messages.push(make_message(text));
-    text = "「身長」cmと「体重」kgをこの順で入力してください。単位を半角英数字で忘れないようにしてください！";
-    messages.push(make_message(text));
-  }
-  else{
-    if(input.indexOf("cm") > input.indexOf("kg")){
-      text = "!!warning!!\n順番が逆です";
-      messages.push(make_message(text));
-      status = "warning"
-    }
-    if(input.indexOf("cm") === -1 || input.indexOf("kg") === -1){
-      text = "!!warning!!\n要素が抜けています。やり直し！";
-      messages.push(make_message(text));
-      status = "warning"
-    }
-
-    else if(status != "warning"){
-      const m_pos = input.indexOf("cm");
-      const kg_pos = input.indexOf("kg");
-
-      let length_data = input.slice(m_pos - 3, m_pos);
-      let weigth_data = input.slice(kg_pos - 2, kg_pos);
-
-      let length = parseInt(length_data);
-      let weight = parseInt(weigth_data);
-
-        if(isNaN(length) || isNaN(weight)){
-          text = "身長は三桁、体重は二桁以上でお願いします。";
-          messages.push(make_message(text));
-          text = "その範囲にいない方は測定できません";
-          messages.push(make_message(text));
-          status = "not_check";
-        }
-        else if(status == "true"){
-          BMI = Math.fround( weight*10000 / (length*length));
-
-          if(isNaN(BMI)){
-            text = "エラー発生。\nそれは人ですか？"
-            messages.push(make_message(text));
-            status = "error"
-          }
-          else if(status == "true"){
-            text = `あなたのBMIは${BMI}です。`;
-          messages.push(make_message(text));
-
-          if(BMI < 18.5 && BMI > 10){
-            text = "痩せています。\nたくさん食べましょう。";
-            messages.push(make_message(text));
-          }
-          else if(BMI < 22.5 && BMI > 18.5){
-            text = "適正範囲です。\n保ちましょう。";
-            messages.push(make_message(text));
-          }
-          else if(BMI < 40 && BMI > 22.5){
-            text = "太りすぎです。\nさようなら。";
-            messages.push(make_message(text));
-          }
-          else{
-            text = "まじか\nそんなこともあるんですね。";
-            messages.push(make_message(text));
-
-          }
-
-        }        
-      } 
-     } 
-    }
-
-  return messages;
+  // 2. オウム返しする
+  return {
+    type: "text",
+    // `（バッククォート）で囲った中で${変数名}や${式}を書くと結果が展開される
+    // テンプレートリテラル（Template literal）という文法です
+    text: `${input}、と言いましたね？`
+    // 以下と同じです
+    // text: input + '、と言いましたね？'
+  };
 }
+
 const server = express();
 
 server.use("/images", express.static(path.join(__dirname, "images")));
@@ -105,7 +29,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
 
   for (const event of req.body.events) {
-    if (event.type === "message") {
+    if (event.type === "message" && event.message.type === "text") {
       const message = createReplyMessage(event.message.text);
       lineClient.replyMessage(event.replyToken, message);
     }
