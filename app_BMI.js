@@ -67,6 +67,7 @@ function createReplyMessage(input) {
             messages.push(make_message(text));
             status = "error"
           }
+          
           else if(status == "true"){
             text = `あなたのBMIは${BMI}です。`;
           messages.push(make_message(text));
