@@ -18,32 +18,34 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   for (const event of req.body.events) {
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
       if (event.message.text == "履歴") {
-        pool.connect((err, client, done) => {
-          const query = "SELECT * FROM talk WHERE user_id = '"+event.source.userId+"';";
-          console.log("query: " + query);
-          client.query(query, (err, result) => {
-            console.log(result);
-            done();
-            let messages = [];
-            for (const row of result.rows) {
-              messages.push({type: "text", text: row.message});
-            }
-            lineClient.replyMessage(event.replyToken, messages.slice(-5));
-          });
-        });
+        console.log("on rireki");
+        // pool.connect((err, client, done) => {
+        //   const query = "SELECT * FROM talk WHERE user_id = '"+event.source.userId+"';";
+        //   console.log("query: " + query);
+        //   client.query(query, (err, result) => {
+        //     console.log(result);
+        //     done();
+        //     let messages = [];
+        //     for (const row of result.rows) {
+        //       messages.push({type: "text", text: row.message});
+        //     }
+        //     lineClient.replyMessage(event.replyToken, messages.slice(-5));
+        //   });
+        // });
       }
       else {
-        pool.connect((err, client, done) => {
-          const query = "INSERT INTO talk (user_id, message) VALUES ("
-            +"'"+event.source.userId+"', '"+event.message.text+"');";
-          console.log("query: " + query);
-          client.query(query, (err, result) => {
-            done();
-            if (!err) {
-              lineClient.replyMessage(event.replyToken, {type: "text", text: "記録しました。"});
-            }
-          });
-        });
+        console.log("on else");
+        // pool.connect((err, client, done) => {
+        //   const query = "INSERT INTO talk (user_id, message) VALUES ("
+        //     +"'"+event.source.userId+"', '"+event.message.text+"');";
+        //   console.log("query: " + query);
+        //   client.query(query, (err, result) => {
+        //     done();
+        //     if (!err) {
+        //       lineClient.replyMessage(event.replyToken, {type: "text", text: "記録しました。"});
+        //     }
+        //   });
+        // });
       }
     }
   }
