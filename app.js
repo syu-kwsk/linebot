@@ -11,16 +11,13 @@ const lineClient = new line.Client(lineConfig);
 function createReplyMessage(input) {
   let message;
   let hands = ["グー", "チョキ", "パー"];
+  let x = Math.random();
+  let random = Math.floor(3 * x);
+
   if (hands.indexOf(input) == -1){
     message = "グーかチョキかパーを入力してね";
   } else {
-    if (input == hands[0]) {
-      message = "パー";
-    } else if (input == hands[1]) {
-      message = "グー";
-    } else {
-      message = "チョキ";
-    }  
+    message = hands[random];
   }
   
   return {
