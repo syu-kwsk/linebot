@@ -9,12 +9,18 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-  // 1. 固定メッセージを返す
-  let name;
-  name = "wataru";
+  let message;
+  if (input == "グー") {
+    message = "パー";
+  } else if (input == "チョキ") {
+    message = "グー";
+  } else {
+    message = "チョキ";
+  }
+
   return {
     type: "text",
-    text: `${name}が${input}、と言いましたね？`
+    text: message
   };
 }
 
