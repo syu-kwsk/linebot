@@ -14,7 +14,7 @@ function createReplyMessage(input) {
   const appUrl = process.env.HEROKU_APP_URL;
   return {
     type: "image",
-    previewImageUrl: `${appUrl}images/takoyaki.png`,
+    previewImageUrl: `${appUrl}images/takoyaki.jpg`,
     originalContentUrl: `${appUrl}images/answer.png`
   };
 
