@@ -11,13 +11,22 @@ const lineClient = new line.Client(lineConfig);
 function createReplyMessage(input) {
   let message;
   let hands = ["グー", "チョキ", "パー"];
-  let x = Math.random();
-  let random = Math.floor(3 * x);
 
   if (hands.indexOf(input) == -1){
     message = "グーかチョキかパーを入力してね";
   } else {
-    message = hands[random];
+    let x = Math.random();
+    let botHandNum = Math.floor(3 * x);
+    let userHandNum = hands.indexOf(input);
+    let judge = (userHandNum - botHandNum + 3) % 3;
+
+    if (judge == 2) {
+      message = `私は${hands[botHandNum]}です。あなたの勝ちです。`;
+    } else if (judge == 1) {
+      message = `私は${hands[botHandNum]}です。あなたの負けです。`;
+    } else {
+      message = `私も${hands[botHandNum]}です。あいこです。`
+    }
   }
   
   return {
