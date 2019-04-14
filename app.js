@@ -10,9 +10,11 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
   // 1. 固定メッセージを返す
+  let name;
+  name = "wataru";
   return {
     type: "text",
-    text: "うぇーん"
+    text: `${name}が${input}、と言いましたね？`
   };
 }
 
