@@ -18,8 +18,19 @@ function createReplyMessage(input) {
   else{
     let x = Math.random();　　　　　　 //xは0から1の間
     let botHandNum = Math.floor(3*x); //botHandNumは0,1,2のどれか
+    let userHandNum = hands.indexOf(input);
+    let judge;
+    judge = (userHandNum - botHandNum + 3) % 3;
 
-    message = hands[botHandNum];      //handsの[ランダム番目]
+    if(judge == 2){
+      message = "私の手は" + hands[botHandNum] + "です。あなたの勝ちです。";
+    }
+    else if(judge == 1){
+      message = "私の手は" + hands[botHandNum] + "です。あなたの負けです。";
+    }
+    else if(judge == 0){
+      message = "私の手は" + hands[botHandNum] + "です。あいこです。";
+    }
   }
 
   return {

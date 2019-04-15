@@ -21,35 +21,35 @@ function createReplyMessage(input) {
     
     if(input == hands[0]){
       if(botHandNum == 0){
-        message == "私はグーです。あいこです。";
+        message = "私はグーです。あいこです。";
       }
       else if(botHandNum == 1){
-        message == "私はチョキです。あなたの勝ちです。";
+        message = "私はチョキです。あなたの勝ちです。";
       }
       else if(botHandNum == 2){
-        message == "私はパーです。あなたの負けです。";
+        message = "私はパーです。あなたの負けです。";
       }
     }
     else if(input == hands[1]){
       if(botHandNum == 0){
-        message == "私はグーです。あなたの負けです。";
+        message = "私はグーです。あなたの負けです。";
       }
       else if(botHandNum == 1){
-        message == "私はチョキです。あいこです。";
+        message = "私はチョキです。あいこです。";
       }
       else if(botHandNum == 2){
-        message == "私はパーです。あなたの勝ちです。";
+        message = "私はパーです。あなたの勝ちです。";
       }
     }
     else if(input == hands[2]){
       if(botHandNum == 0){
-        message == "私はグーです。あなたの勝ちです。";
+        message = "私はグーです。あなたの勝ちです。";
       }
       else if(botHandNum == 1){
-        message == "私はチョキです。あなたの負けです。";
+        message = "私はチョキです。あなたの負けです。";
       }
       else if(botHandNum == 2){
-        message == "私はパーです。あいこです。";
+        message = "私はパーです。あいこです。";
       }
     }
 
