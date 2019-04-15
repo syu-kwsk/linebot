@@ -15,7 +15,7 @@ function createReplyMessage(input) {
   let num = hands.indexOf(input);
 
   if(num == -1){
-    message == "グーかチョキかパーを入れてね";
+    message = "グーかチョキかパーを入れてね";
   }
 
   else{
