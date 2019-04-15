@@ -9,22 +9,8 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-  
   let message;
-  let hands = ["グー","チョキ","パー"];
-
-
-  if(hands.indexOf(input) == -1){
-    message = "グーかチョキかパーを入れてね";
-  }
-
-  else{
-    let x = Math.random(); //０から１未満の数字
-    let num = Math.floor(3*x); //０、１、２のどれか
-
-    message = hands[num];
-
-    }
+  let message = input;
 
   return {
     type: "text",
