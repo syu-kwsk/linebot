@@ -13,18 +13,13 @@ function createReplyMessage(input) {
   let hands = ["グー","チョキ","パー"];//0はグー,1はチョキ,2はパー
 
   if(hands.indexOf(input) == -1){
-    message = "グーかパーかチョキを入れてね";//グーもチョキもパーもなかった
+    message = "グーかチョキかパーを入れてね";//グーもチョキもパーもなかった
   }
   else{
-    if(input == hands[0]){
-      message = "パー";
-    }
-    else if(input == hands[1]){
-      message = "グー";
-    }
-    else if(input == hands[2]){
-      message = "チョキ";
-    }
+    let x = Math.random();　　　　　　 //xは0から1の間
+    let botHandNum = Math.floor(3*x); //botHandNumは0,1,2のどれか
+
+    message = hands[botHandNum];      //handsの[ランダム番目]
   }
 
   return {
