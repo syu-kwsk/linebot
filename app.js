@@ -11,15 +11,16 @@ const lineClient = new line.Client(lineConfig);
 function createReplyMessage(input) {
   
   let message;
-  
-  if(input == "グー"){
+  let hands = ["グー","チョキ","パー"];
+
+  if(input == hands[0]){
     message = "パー";
   }
-  else if(input == "チョキ"){
+  else if(input == hands[1]){
     message = "グー"; 
 
   }
-  else if(input == "パー"){
+  else if(input == hands[2]){
     message = "チョキ";
 
   }
