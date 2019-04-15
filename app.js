@@ -10,7 +10,7 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
   let message;
-  let message = input;
+  message = input;
 
   return {
     type: "text",
