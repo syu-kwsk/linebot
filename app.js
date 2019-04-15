@@ -10,7 +10,16 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
   let message;
-  message = input;
+  
+  if(input == "グー"){
+    message = "パー";
+  }
+  else if(input == "チョキ"){
+    message = "グー";
+  }
+  else if(input == "パー"){
+    message = "チョキ";
+  }
 
   return {
     type: "text",
