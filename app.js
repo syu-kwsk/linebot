@@ -13,7 +13,7 @@ function createReplyMessage(input) {
   let hands = ["グー","チョキ","パー"];//0はグー,1はチョキ,2はパー
 
   if(hands.indexOf(input) == -1){
-    message == "グーかパーかチョキを入れてね";//グーもチョキもパーもなかった
+    message = "グーかパーかチョキを入れてね";//グーもチョキもパーもなかった
   }
   else{
     if(input == "グー"){
