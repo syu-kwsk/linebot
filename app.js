@@ -12,25 +12,19 @@ function createReplyMessage(input) {
   
   let message;
   let hands = ["グー","チョキ","パー"];
-  let num = hands.indexOf(input);
 
-  if(num == -1){
+
+  if(hands.indexOf(input) == -1){
     message = "グーかチョキかパーを入れてね";
   }
 
   else{
+    let x = Math.random(); //０から１未満の数字
+    let num = Math.floor(3*x); //０、１、２のどれか
 
-    if(input == hands[0]){
-      message = "パー";
-    }
-    else if(input == hands[1]){
-      message = "グー"; 
-    }
-    else if(input == hands[2]){
-      message = "チョキ";
+    message = hands[num];
 
     }
-  }
 
   return {
     type: "text",
