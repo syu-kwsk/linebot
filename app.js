@@ -16,7 +16,7 @@ function createReplyMessage(input) {
 
   return {
     type: "text",
-    text: mesaage
+    text: message
   };
 }
 
