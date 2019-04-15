@@ -16,13 +16,13 @@ function createReplyMessage(input) {
     message = "グーかパーかチョキを入れてね";//グーもチョキもパーもなかった
   }
   else{
-    if(input == "グー"){
+    if(input == hands[0]){
       message = "パー";
     }
-    else if(input == "チョキ"){
+    else if(input == hands[1]){
       message = "グー";
     }
-    else if(input == "パー"){
+    else if(input == hands[2]){
       message = "チョキ";
     }
   }
