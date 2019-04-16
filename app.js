@@ -71,7 +71,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           }
           else{
             messages.push(make_message("let's word"));
-            messeges.push(make_message(question[0]));
+            messages.push(make_message(question[0]));
             currentNum = 0;
             currentTurn = "answer";
           
