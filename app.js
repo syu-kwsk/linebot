@@ -34,10 +34,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         const query = "SELECT * FROM talk WHERE user_id = '"+event.source.userId+"';";
         client.query(query, (err, result) => {
           done();
-          for (const row of result.rows) {
-           currentTurn  = row.currentTurn;
-           currentNum = row.currentNum;
-          }
+
           const messages = [];
           function make_message(str){
 
@@ -45,11 +42,16 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
               type: "text",
               text: str
             };
-        }
+          }
 
           let question = ["dog", "cat", "bird"];
           let answer   = ["犬", "猫", "鳥"];
 
+          for (const row of result.rows) {
+           currentTurn  = row.currentTurn.slice(-1);
+           currentNum = row.currentNum.slice(-1);
+          }
+          
           if(currentTurn == "question" || currentTurn == "answer"){  
 
             if(currentTurn == "question"){
