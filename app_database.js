@@ -13,24 +13,14 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 const server     = express();
 
+
+
 server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
   for (const event of req.body.events) {
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
       if (event.message.text == "履歴") {
-        pool.connect((err, client, done) => {
-          const query = "SELECT * FROM talk WHERE user_id = '"+event.source.userId+"';";
-          console.log("query: " + query);
-          client.query(query, (err, result) => {
-            console.log(result);
-            done();
-            let messages = [];
-            for (const row of result.rows) {
-              messages.push({type: "text", text: row.message});
-            }
-            lineClient.replyMessage(event.replyToken, messages.slice(-5));
-          });
-        });
+        
       }
       else {
         pool.connect((err, client, done) => {
