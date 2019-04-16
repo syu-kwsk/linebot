@@ -46,6 +46,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
            currentTurn  = row.currentTurn;
            currentNum = row.currentNum;
           }
+          let messages = [];
 
           if(currentTurn == "question" || currentTurn == "answer"){  
 
