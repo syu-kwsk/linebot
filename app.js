@@ -48,8 +48,8 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           let answer   = ["犬", "猫", "鳥"];
 
           for (const row of result.rows) {
-           currentTurn  = row.currentTurn.slice(-1);
-           currentNum = row.currentNum.slice(-1);
+           currentTurn  = row.currentTurn;
+           currentNum = row.currentNum;
           }
           
           if(currentTurn == "question" || currentTurn == "answer"){  
