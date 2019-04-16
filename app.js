@@ -9,10 +9,13 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-  // 1. 固定メッセージを返す
+
+  let message;
+  message = input;
+
   return {
     type: "text",
-    text: "hello!!"
+    text: message
   };
 }
 
