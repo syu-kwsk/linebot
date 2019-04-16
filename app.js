@@ -47,8 +47,8 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             };
         }
 
-  let question = ["dog", "cat", "bird"];
-  let answer   = ["犬", "猫", "鳥"];
+          let question = ["dog", "cat", "bird"];
+          let answer   = ["犬", "猫", "鳥"];
 
           if(currentTurn == "question" || currentTurn == "answer"){  
 
@@ -71,7 +71,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           }
           else{
             messages.push(make_message("let's word"));
-            masseges.push(make_messiage(question[0]));
+            messeges.push(make_message(question[0]));
             currentNum = 0;
             currentTurn = "answer";
           
