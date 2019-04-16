@@ -51,6 +51,8 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
            currentTurn  = row.currentTurn;
            currentNum = row.currentNum;
           }
+          console.log(currentNum);
+          console.log(currentTurn);
           
           if(currentTurn == "question" || currentTurn == "answer"){  
 
@@ -81,7 +83,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           
 
 
-
+           lineClient.replyMessage(event.replyToken, messages);
 
 
         });
