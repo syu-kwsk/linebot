@@ -29,27 +29,31 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
   res.sendStatus(200);
   for (const event of req.body.events) {
+
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
+       
+      const messages = [];
+      function make_message(str){
+
+        return {
+          type: "text",
+          text: str
+        };
+      }
+
+      let question = ["dog", "cat", "bird"];
+      let answer   = ["犬", "猫", "鳥"];
+
+
       pool.connect((err, client, done) => {
         const query = "SELECT * FROM talk WHERE user_id = '"+event.source.userId+"';";
         client.query(query, (err, result) => {
           done();
 
-          const messages = [];
-          function make_message(str){
-
-            return {
-              type: "text",
-              text: str
-            };
-          }
-
-          let question = ["dog", "cat", "bird"];
-          let answer   = ["犬", "猫", "鳥"];
-
+          
           for (const row of result.rows) {
-           currentTurn  = row.currentTurn;
-           currentNum = row.currentNum;
+           currentTurn  = row.currentturn;
+           currentNum = row.currentnum;
           }
           console.log(currentNum);
           console.log(currentTurn);
@@ -89,6 +93,17 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         });
       });
       
+      pool.connect((err, client, done) => {
+        const query = "INSERT INTO wordbook (user_id, currentnum, currentturn) VALUES ("
+          +"'"+event.source.userId+"', '"+currentNum+"', '"+currentTurn+"');";
+        console.log("query: " + query);
+        client.query(query, (err, result) => {
+          done();
+          if (!err) {
+            console.log("good");
+          }
+        });
+      });
    
    
    
