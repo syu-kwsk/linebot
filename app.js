@@ -13,40 +13,83 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 const server     = express();
 
+
+function createReplyMessage(input) {
+　const messages = [];
+  function make_message(str){
+    return{
+      type: "text",
+      text: str
+    };
+  }
+  let question = ["dog", "cat", "bird"];
+  let answer   = ["犬", "猫", "鳥"];
+
+  let currentNum;
+  let currentTurn;  
+  
+    return messages;
+}
+
+server.use("/images", express.static(path.join(__dirname, "images")));
+
 server.post("/webhook", line.middleware(lineConfig), (req, res) => {
+  // LINEのサーバーに200を返す
   res.sendStatus(200);
   for (const event of req.body.events) {
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
-      if (event.message.text == "履歴") {
-        pool.connect((err, client, done) => {
-          const query = "SELECT * FROM talk WHERE user_id = '"+event.source.userId+"';";
-          console.log("query: " + query);
-          client.query(query, (err, result) => {
-            console.log(result);
-            done();
-            let messages = [];
-            for (const row of result.rows) {
-              messages.push({type: "text", text: row.message});
+      pool.connect((err, client, done) => {
+        const query = "SELECT * FROM talk WHERE user_id = '"+event.source.userId+"';";
+        client.query(query, (err, result) => {
+          done();
+          for (const row of result.rows) {
+           currentTurn  = row.currentTurn;
+           currentNum = row.currentNum;
+          }
+
+          if(currentTurn == "question" || currentTurn == "answer"){  
+
+            if(currentTurn == "question"){
+              masseges.push(make_message(question[currentNum]));
+              currentTurn = "answer"; //データベース
             }
-            lineClient.replyMessage(event.replyToken, messages.slice(-5));
-          });
-        });
-      }
-      else {
-        pool.connect((err, client, done) => {
-          const query = "INSERT INTO talk (user_id, message) VALUES ("
-            +"'"+event.source.userId+"', '"+event.message.text+"');";
-          console.log("query: " + query);
-          client.query(query, (err, result) => {
-            done();
-            if (!err) {
-              lineClient.replyMessage(event.replyToken, {type: "text", text: "記録しました。"});
+            else if(currentTurn == "answer"){
+              messages.push(make_message("answer is " + answer[currentNum]));
+          
+              if(question[currentNum] == answer[currentNum]){
+                messages.push(make_message("correct"));
+              }
+              else{
+                messages.push(make_message("wrong"));
+              }
+              currentNum = currentNum + 1;
+              currentTurn = "qusetion";
             }
-          });
+          }
+          else{
+            messages.push(make_message("let's word"));
+            masseges.push(make_messiage(question[0]));
+            currentNum = 0;
+            currentTurn = "answer";
+          
+           }
+          
+
+
+
+
+
         });
-      }
+      });
+      
+   
+   
+   
+   
     }
   }
+  
+  
 });
 
-server.listen(process.env.PORT || 8000);
+server.listen(process.env.PORT || 8080);
