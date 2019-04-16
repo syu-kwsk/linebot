@@ -20,9 +20,21 @@ function createReplyMessage(input) {
   else {
     let x = Math.random();
     let botHandNum = Math.floor(3*x);
+    let userHandNum = hands.indexOf(input);
+    let judge;
 
-    message = hands[botHandNum];
+    judge = (userHandNum - botHandNum + 3) % 3;
 
+    if(judge == 2){
+      message = hands[botHandNum] + "です。あなたの勝ちです。";
+    }
+    else if(judge == 1){
+      message = hands[botHandNum] + "です。あなたの負けです。";
+    }
+    else if(judge == 0){
+      message = hands[botHandNum] + "です。あいこです。";
+    }
+    
   }
 
   return {
