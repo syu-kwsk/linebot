@@ -13,14 +13,21 @@ function createReplyMessage(input) {
   let message;
   let hands = ["グー", "チョキ", "パー"];
 
-  if(input == hands[0]){
-    message = "パー";
+  let num = hands.indexOf(input);
+
+  if(num == -1){
+    message = "グーかチョキかパーを入れてね";
   }
-  else if(input == hands[1]){
-    message = "グー";
-  }
-  else if(input == "パー"){
-    message = "チョキ";
+  else {
+    if(input == hands[0]){
+      message = "パー";
+    }
+    else if(input == hands[1]){
+      message = "グー";
+    }
+    else if(input == "パー"){
+      message = "チョキ";
+    }
   }
 
   return {
