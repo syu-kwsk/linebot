@@ -9,33 +9,10 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-  let message;
-  let hands = ["グー","チョキ","パー"];//0はグー,1はチョキ,2はパー
-
-  if(hands.indexOf(input) == -1){
-    message = "グーかチョキかパーを入れてね";//グーもチョキもパーもなかった
-  }
-  else{
-    let x = Math.random();　　　　　　 //xは0から1の間
-    let botHandNum = Math.floor(3*x); //botHandNumは0,1,2のどれか
-    let userHandNum = hands.indexOf(input);
-    let judge;
-    judge = (userHandNum - botHandNum + 3) % 3;
-
-    if(judge == 2){
-      message = "私の手は" + hands[botHandNum] + "です。あなたの勝ちです。";
-    }
-    else if(judge == 1){
-      message = "私の手は" + hands[botHandNum] + "です。あなたの負けです。";
-    }
-    else if(judge == 0){
-      message = "私の手は" + hands[botHandNum] + "です。あいこです。";
-    }
-  }
-
+  // 1. 固定メッセージを返す
   return {
     type: "text",
-    text: message
+    text: "プロ研へようこそ！"
   };
 }
 
