@@ -15,15 +15,7 @@ const server     = express();
 
 
 function createReplyMessage(input) {
-　const messages = [];
-  function make_message(str){
-    return{
-      type: "text",
-      text: str
-    };
-  }
-  let question = ["dog", "cat", "bird"];
-  let answer   = ["犬", "猫", "鳥"];
+　
 
   let currentNum;
   let currentTurn;  
@@ -46,7 +38,17 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
            currentTurn  = row.currentTurn;
            currentNum = row.currentNum;
           }
-          let messages = [];
+          const messages = [];
+          function make_message(str){
+
+            return {
+              type: "text",
+              text: str
+            };
+        }
+
+  let question = ["dog", "cat", "bird"];
+  let answer   = ["犬", "猫", "鳥"];
 
           if(currentTurn == "question" || currentTurn == "answer"){  
 
