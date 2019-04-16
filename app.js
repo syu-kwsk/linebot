@@ -43,6 +43,8 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
 
       let question = ["dog", "cat", "bird"];
       let answer   = ["犬", "猫", "鳥"];
+      let currentTurn;
+      let currentNum;
 
 
       pool.connect((err, client, done) => {
