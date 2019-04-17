@@ -4,6 +4,7 @@ const pg      = require("pg");
 const config  = require("./config.json");
 
 const pool = new pg.Pool(config.db.postgres);
+const pool2 = new pg.Pool(config.db.postgres);
 
 const lineConfig = {
   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
@@ -95,7 +96,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         });
       });
       
-      pool.connect((err, client, done) => {
+      pool2.connect((err, client, done) => {
         const query = "INSERT INTO wordbook (user_id, currentnum, currentturn) VALUES ("
           +"'"+event.source.userId+"', '"+currentNum+"', '"+currentTurn+"');";
         console.log("query: " + query);
